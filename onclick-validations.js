@@ -4,7 +4,7 @@
 // Required. Make sure views are acessible in nested functions.
 var view = this;
 
-// Optional. Validate required input field text.
+// Optional. Validate required input field text else sets invalid style.
 function checkValid(field) {
 	var field = view.ui.get(field);
 	if (!field.getText()) {
@@ -16,7 +16,7 @@ function checkValid(field) {
 	}
 }
 
-// Optional. Validate date inputs. 
+// Optional. Validate date inputs else sets invalid style.
 function validDate(field) {
 	var date = view.ui.get(field);
 	if (date.getDate() == "") {
@@ -27,6 +27,18 @@ function validDate(field) {
 		date.setValid(true);
 		return true;
 	}	
+}
+
+// Optional. Validates that single select input exists and is therefore valid; else sets invalid style.
+function checkValidSelect(field) {
+	var field = view.ui.get(field);
+	if (field.getSelectedItem() == undefined) {
+		field.setValid(false, "Field is required");
+		return false;
+	} else {
+		field.setValid(true);
+	}
+	return true;
 }
 
 // Optional. Validate checkboxes.
