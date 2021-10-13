@@ -78,7 +78,20 @@ this.customValidate = function() {
 	});
 	
   // Error message lists all invalid field names. 
-	var message = (invalidFields.length === 1 ? invalidFields[0] : (invalidFields.length === 2 ? invalidFields[0] + " and " + invalidFields[1] : invalidFields.slice(0, invalidFields.length - 1).join(', ') + ", and " + invalidFields.slice(-1))) + " must be completed prior to submit.";
+	appendMsg = " must be completed prior to submit."
+	switch(invalidFields.length) {
+	  case 0:
+	    message = "";
+	    break;
+	  case 1:
+	    message = invalidFields[0] + appendMsg;
+	    break;
+	  case 2:
+		message = invalidFields[0] + " and " + invalidFields[1] + appendMsg;
+	    break;
+	  default:
+	    message = invalidFields.slice(0, invalidFields.length - 1).join(', ') + ", and " + invalidFields.slice(-1) + appendMsg;
+	} 
 	message = message[0].toUpperCase() + message.slice(1);
 	results = {
 		isValid: isValid,
