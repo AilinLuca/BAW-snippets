@@ -1,22 +1,23 @@
-// validate text input
-function checkValid(field) {
-	var field = view.ui.get(field);
-	if (field.getText() == "") {
-		field.setValid(false, "Field is required");
-		return false;
-	} else {
-		field.setValid(true);
+// Attached to all text fields to do live validation
+this.selectValidateOnChange = function(me) {
+	// if view is required
+	if (me.context.options._metadata.visibility.get("value") === "REQUIRED") {
+		if (me.getSelectedItem() === "") {
+			me.setValid(false, "This field is required.");
+		} else {
+			me.setValid(true);
+		}
 	}
-	return true;
 }
 
-// validate dropdown
-function checkSelected(field) {
-	var field = view.ui.get(field);
-	if (!field.getSelectedItem()) {
-		field.setValid(false, "Field is required");
-		return false;
-	} else {
-		field.setValid(true);
+// Attached to all single selects to do live validation
+this.textValidateOnChange = function(me) {
+	// if view is required
+	if (me.context.options._metadata.visibility.get("value") === "REQUIRED") {
+		if (me.getText() === "") {
+			me.setValid(false, "This field is required.");
+		} else {
+			me.setValid(true);
+		}
 	}
 }
