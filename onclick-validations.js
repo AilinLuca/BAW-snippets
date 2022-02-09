@@ -104,7 +104,7 @@ this.customValidate = function() {
 	  default:
 	    message = invalidFields.slice(0, invalidFields.length - 1).join(', ') + ", and " + invalidFields.slice(-1) + appendMsg;
 	} 
-	message = message[0].toUpperCase() + message.slice(1);
+	message ? message = message[0].toUpperCase() + message.slice(1) : message;
 	results = {
 		isValid: isValid,
 		message: message
